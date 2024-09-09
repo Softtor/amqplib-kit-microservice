@@ -1,6 +1,6 @@
 {
   "name": "amqplib-kit-microservice",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Kit de desenvolvimento de integrações com microsserviços",
   "main": "app.ts",
   "scripts": {
