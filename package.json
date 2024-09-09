@@ -1,0 +1,30 @@
+{
+  "name": "amqplib-kit-microservice",
+  "version": "0.0.1",
+  "description": "Kit de desenvolvimento de integrações com microsserviços",
+  "main": "app.ts",
+  "scripts": {
+    "test": "jest "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Softtor/amqplib-kit-microservice.git"
+  },
+  "keywords": [
+    "kit",
+    "microservices"
+  ],
+  "author": "joaovictorolvr",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Softtor/amqplib-kit-microservice/issues"
+  },
+  "homepage": "https://github.com/Softtor/amqplib-kit-microservice#readme",
+  "dependencies": {
+    "amqplib": "^0.10.4",
+    "env-var": "^7.5.0"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.10.5"
+  }
+}
