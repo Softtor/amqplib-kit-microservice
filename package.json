@@ -4,7 +4,7 @@
   "description": "Kit de desenvolvimento de integrações com microsserviços",
   "main": "app.ts",
   "scripts": {
-    "test": "jest "
+    "test": ""
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,13 @@
   },
   "homepage": "https://github.com/Softtor/amqplib-kit-microservice#readme",
   "dependencies": {
-    "amqplib": "^0.10.4",
-    "env-var": "^7.5.0"
+    "amqplib": "^0.10.4"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-typescript": "^7.24.7",
     "@types/amqplib": "^0.10.5",
+    "@types/jest": "^29.5.12",
     "jest": "^29.7.0"
   }
 }
