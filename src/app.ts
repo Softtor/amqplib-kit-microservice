@@ -1,5 +1,5 @@
 import main from "./bootstrap/init-rpc";
-
+// This is for example purposes only, in a real application you would use a more specific queue name
 main("rpc_queue")
   .then(() => {
     console.log("RPC server started, listening in rpc_queue");
