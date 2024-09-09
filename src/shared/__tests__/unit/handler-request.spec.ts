@@ -1,7 +1,5 @@
-import handleRequest, {
-  HandlerType,
-  Prompts,
-} from "../../handlers/handler-request";
+import { HandlerType, Prompts } from "../../../types/handler-types";
+import handleRequest from "../../handlers/handler-request";
 
 describe("handleRequest", () => {
   const mockHandler1: HandlerType = jest.fn().mockResolvedValue("Result 1");
