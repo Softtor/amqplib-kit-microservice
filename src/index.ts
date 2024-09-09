@@ -1,3 +1,7 @@
 import * as rpc from "./bootstrap/init-rpc";
 
-export default rpc.default;
+const rpcServer = rpc.default;
+
+export default {
+  rpcServer,
+};
