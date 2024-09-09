@@ -4,7 +4,7 @@
   "description": "Kit de desenvolvimento de integrações com microsserviços",
   "main": "app.ts",
   "scripts": {
-    "test": "test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
