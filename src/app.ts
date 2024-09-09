@@ -1,2 +1,3 @@
-import main from "./bootstrap/init-rpc";
-export default main;
+import * as rpc from "./bootstrap/init-rpc";
+
+export default rpc.default;
