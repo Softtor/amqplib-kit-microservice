@@ -1,6 +1,6 @@
 // handler must return always a json object
-export type HandlerType = (message?: string) => Promise<string>;
-export type Prompts = { name: string; handler: HandlerType }[];
+import { Prompts } from "src/types/handler-types";
+import { HandlerType } from "src/types/handler-types";
 
 export default async function handleRequest(
   prompts: Prompts,

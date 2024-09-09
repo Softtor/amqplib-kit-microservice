@@ -1,5 +1,5 @@
 import fs from "node:fs";
-import { Prompts } from "src/shared/handlers/handler-request";
+import { Prompts } from "src/types/handler-types";
 
 export function loadPrompts(promptsDir: string): Prompts {
   const prompts = fs.readdirSync(promptsDir).map((file) => {
