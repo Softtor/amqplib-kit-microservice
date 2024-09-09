@@ -1,14 +1,12 @@
 import fs from "node:fs";
 import ampq from "amqplib";
-import handleRequest, { Prompts } from "../shared/handlers/handler-request";
-import { RABBITMQ_HOST, RABBITMQ_PORT, PROMPTS_DIR } from "./environment";
+import handleRequest from "../shared/handlers/handler-request";
+import { PROMPTS_DIR, RABBITMQ_HOST, RABBITMQ_PORT } from "./environment";
+import { loadPrompts } from "./load-prompts";
 
 const RABBITMQ_URL = `amqp://${RABBITMQ_HOST}:${RABBITMQ_PORT}`;
 
-// resolve prompts dir loading all prompts files
-const prompts: Prompts = fs.readdirSync(PROMPTS_DIR).map((file) => {
-  return require(PROMPTS_DIR + "/" + file);
-});
+const prompts = loadPrompts(PROMPTS_DIR);
 
 async function main() {
   const connection = await ampq.connect(RABBITMQ_URL, {});

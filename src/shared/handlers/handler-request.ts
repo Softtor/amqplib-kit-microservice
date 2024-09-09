@@ -1,7 +1,7 @@
-import toJson from "../helpers/sequelize/to-json.sequelize";
-
-export type HandlerType = (message?: string) => Promise<any>;
+// handler must return always a json object
+export type HandlerType = (message?: string) => Promise<string>;
 export type Prompts = { name: string; handler: HandlerType }[];
+
 export default async function handleRequest(
   prompts: Prompts,
   prompt: string,
@@ -12,5 +12,5 @@ export default async function handleRequest(
   if (!handler) {
     throw new Error(`No handler found for prompt: ${prompt}`);
   }
-  return toJson(await handler(message));
+  return handler(message);
 }
