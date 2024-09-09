@@ -8,13 +8,13 @@ const RABBITMQ_URL = `amqp://${RABBITMQ_HOST}:${RABBITMQ_PORT}`;
 
 const prompts = loadPrompts(PROMPTS_DIR);
 
-async function main() {
+export default async function main(queueName: string) {
   const connection = await ampq.connect(RABBITMQ_URL, {});
   const channel = await connection.createChannel();
 
-  await channel.assertQueue("process_queue", { durable: false });
+  await channel.assertQueue(queueName, { durable: false });
 
-  await channel.consume("process_queue", async (message) => {
+  await channel.consume(queueName, async (message) => {
     if (!message) return;
     const { pattern, data } = JSON.parse(message.content.toString());
     try {
@@ -32,10 +32,4 @@ async function main() {
     }
     channel.ack(message);
   });
-}
-
-export default function startRpcServer() {
-  main()
-    .then(() => console.log("RPC Server started"))
-    .catch((err) => console.error("Error starting RPC Server" + err));
 }
