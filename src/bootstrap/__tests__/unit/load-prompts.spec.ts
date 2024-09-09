@@ -1,52 +1,45 @@
 import fs from "node:fs";
 import { loadPrompts } from "../../load-prompts";
-jest.mock("fs");
-jest.mock(
-  "/path/to/prompts/prompt1.js",
-  () => ({
-    name: "Prompt 1",
-    message: "Enter value for Prompt 1",
-    handler: jest.fn(),
-  }),
-  { virtual: true }
-);
-jest.mock(
-  "/path/to/prompts/prompt2.js",
-  () => ({
-    name: "Prompt 2",
-    message: "Enter value for Prompt 2",
-    handler: jest.fn(),
-  }),
-  { virtual: true }
-);
+
+// Mock do módulo fs
+jest.mock("node:fs");
 
 describe("loadPrompts", () => {
+  const promptsDir = "/fake/promptsDir";
+
   beforeEach(() => {
     jest.clearAllMocks();
   });
-  it("should load prompts from the given directory", () => {
-    const promptsDir = "/path/to/prompts";
-    const mockPromptFiles = ["prompt1.js", "prompt2.js"];
-    const mockPrompts = [
-      { name: "Prompt 1", message: "Enter value for Prompt 1" },
-      { name: "Prompt 2", message: "Enter value for Prompt 2" },
-    ];
 
-    jest
-      .spyOn(fs, "readdirSync")
-      .mockReturnValue(mockPromptFiles as unknown as fs.Dirent[]);
+  test("deve carregar os prompts corretamente", () => {
+    // Mock para a função readdirSync para retornar uma lista de arquivos
+    (fs.readdirSync as jest.Mock).mockReturnValue(["prompt1.js", "prompt2.js"]);
+
+    // Mock para a função require para retornar objetos simulados
+    jest.mock(
+      "/fake/promptsDir/prompt1.js",
+      () => ({ name: "prompt1", handler: jest.fn() }),
+      { virtual: true }
+    );
+    jest.mock(
+      "/fake/promptsDir/prompt2.js",
+      () => ({ name: "prompt2", handler: jest.fn() }),
+      { virtual: true }
+    );
 
     const result = loadPrompts(promptsDir);
 
+    expect(result).toEqual([
+      { name: "prompt1", handler: expect.any(Function) },
+      { name: "prompt2", handler: expect.any(Function) },
+    ]);
+
     expect(fs.readdirSync).toHaveBeenCalledWith(promptsDir);
-    expect(result).toEqual(mockPrompts);
   });
 
-  it("should throw an error if no prompts are found", () => {
-    const promptsDir = "/path/to/prompts";
-    const mockPromptFiles: string[] = [];
-
-    jest.spyOn(fs, "readdirSync").mockReturnValue(mockPromptFiles as any);
+  test("deve lançar erro se nenhum prompt for encontrado", () => {
+    // Mock para a função readdirSync retornando uma lista vazia
+    (fs.readdirSync as jest.Mock).mockReturnValue([]);
 
     expect(() => loadPrompts(promptsDir)).toThrow("No prompts found");
   });
