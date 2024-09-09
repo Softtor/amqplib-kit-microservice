@@ -1,14 +1,16 @@
-import fs from "node:fs";
 import ampq from "amqplib";
 import handleRequest from "../shared/handlers/handler-request";
-import { PROMPTS_DIR, RABBITMQ_HOST, RABBITMQ_PORT } from "./environment";
 import { loadPrompts } from "./load-prompts";
 
-const RABBITMQ_URL = `amqp://${RABBITMQ_HOST}:${RABBITMQ_PORT}`;
+export default async function main(
+  queueName: string,
+  promptsDir: string,
+  rabbitmqUrl: string
+) {
+  const RABBITMQ_URL = rabbitmqUrl;
+  const PROMPTS_DIR = promptsDir;
+  const prompts = loadPrompts(PROMPTS_DIR);
 
-const prompts = loadPrompts(PROMPTS_DIR);
-
-export default async function main(queueName: string) {
   const connection = await ampq.connect(RABBITMQ_URL, {});
   const channel = await connection.createChannel();
 
