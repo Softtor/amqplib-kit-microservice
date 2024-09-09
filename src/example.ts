@@ -3,6 +3,7 @@ import main from "./bootstrap/init-rpc";
 main("rpc_queue", "./prompts", "amqp://localhost:5672")
   .then(() => {
     console.log("RPC server started, listening in rpc_queue");
+    // for test purposes
   })
   .catch((err) => {
     console.error("Error starting RPC server: " + err);
