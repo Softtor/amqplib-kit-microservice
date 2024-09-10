@@ -1,6 +1,5 @@
 // handler must return always a json object
-import { Prompts } from "src/types/handler-types";
-import { HandlerType } from "src/types/handler-types";
+import { Prompts, HandlerType } from "../../types/handler-types";
 
 export default async function handleRequest(
   prompts: Prompts,
