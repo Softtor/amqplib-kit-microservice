@@ -3,4 +3,5 @@ dist
 
 
 .env
+tsconfig.build*
 tsconfig.tsbuildinfo
