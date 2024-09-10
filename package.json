@@ -1,11 +1,11 @@
 {
   "name": "amqplib-kit-microservice",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Kit de desenvolvimento de integrações com microsserviços",
   "main": "src/index.ts",
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc -p tsconfig.build.json"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,11 @@
   },
   "peerDependencies": {
     "typescript": "5.6.2"
+  },
+  "paths": {
+    "src/*": [
+      "./src/*"
+    ]
   },
   "devDependencies": {
     "@babel/preset-env": "^7.25.4",
